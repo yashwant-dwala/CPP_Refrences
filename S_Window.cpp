@@ -97,10 +97,10 @@ int OccOf_Anagrams(string s,string p){
 			if(u[s[i]]>0) u[s[i]]--;
 			i++;j++;
 		}
-		else if(j-i+1>k){
-			if(u[s[i]]>0) u[s[i]]--;
-			i++;
-		}
+		// else if(j-i+1>k){
+		// 	if(u[s[i]]>0) u[s[i]]--;
+		// 	i++;
+		// }
 	}
 	return ans;
 }
