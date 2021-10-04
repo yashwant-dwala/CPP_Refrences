@@ -251,20 +251,35 @@ bool redundent(string a){
 	}
 	return 0;
 }
-
+vector<int> nsr(vector<int> a, int n){
+	vector<int> v;
+	stack<int> st;
+	for(int i=n-1;i>=0;i--){
+		if(st.empty()) v.push_back(-1);
+		else if(a[i]>st.top()) v.push_back(st.top());
+		else if(a[i]<=st.top()){
+			while(!st.empty()&&a[i]<=st.top()){
+				st.pop();
+			}
+			if(st.empty()) v.push_back(-1);
+			else v.push_back(st.top());
+		} 
+		st.push(a[i]);
+	}	
+	reverse(v.begin(),v.end());
+	return v;
+}
 
 
 ////////////////////////////////////////////////////////
 
 int main() {
-	vector<int> a={2,3,1,2};
+	vector<int> a={4, 8, 5, 2, 25};
 	// a.erase(a.begin()+2);
 	string s="((d-b))";
 	// cout<<redundent(s);
+	a=nsr(a,5);
 	print_arr(a);
-	a.erase(a.begin()+1);
-	print_arr(a);
-
 	
 
 	return 0;

@@ -67,36 +67,22 @@ queue<int> Interleave(queue<int> q){
 	q.push(End);
 	return q;
 }
-string reachTheEnd(vector<string> g, int maxTime){
-	int n =g.size();
-	int time=0;
-	int l=0,bot=0;
-	string ans="No";
-	while(l<n&&bot<n){
-		if(l==n-1&&bot==n-1) return ans;
-
-		cout<<"Enter "<<time<<endl;
-		if(time>=maxTime and (l<n-1||bot<n-1)) return ans;
-  	
-    	if(g[bot][l+1]!='#'&&l<n-1){
-        	time++; l++;
-      	}
-      	if(g[bot+1][l]!='#'&&bot<n-1){
-          time++; bot++;
-      	}
-     	if(g[bot+1][l]=='#'&&g[bot][l+1]=='#'){
-       		time--;
-          	if(g[bot-1][l]!='#'&& bot>0){
-            	bot--;
-          	}
-          	else{
-            	if(l>0){
-                	l--;          
-              	}
-	        }
-		}
-	ans="Yes";
-	return ans;
+string FirstNonRepeating(string a){
+   int count[26]={0};
+   queue<char> q;
+   string ans="";
+   for(auto x:a){
+       q.push(x);
+       count[x-'a']++;
+       if(!q.empty()&&count[q.front()-'a']==1) ans+=q.front();
+       else if(count[q.front()-'a']>1) { 
+           while(!q.empty()&&count[q.front()-'a']>1)
+             q.pop();
+           if(!q.empty()) ans+=q.front();
+           else ans+='#';
+       }
+   }
+   return ans;
 }
 
 int main(){
@@ -106,11 +92,6 @@ int main(){
 	q.push(9);
 	q.push(7);
 	q.push(5);
-	vector<string> v=get_Sq_Mat();
-	cout<<reachTheEnd(v,3);
-	// cout<<reachTheEnd(v,4);
-	cout<<reachTheEnd(v,2);
-	cout<<reachTheEnd(v,6);
 
 	return 0;
 

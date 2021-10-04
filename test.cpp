@@ -4,6 +4,8 @@
 
 using namespace std;
 using namespace __gnu_pbds;
+
+//////////////////   TEMPLATE START ///////////////////////
 // Policy based data structure 
 template<class T> using oset=tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>; 
 #define ll long long int
@@ -39,10 +41,44 @@ void sout(T var1,Types... var2){
 	cout<<var1<<" ";
 	sout(var2...);
 }
+
+//////////////////////  TEMPLATE END /////////////////////////////////
+
 bool cmp(string &x, string &y){
 	if(x.length()<y.length())
 		return x<y;
 	return y<x;
+}
+string reachTheEnd(vector<string> g, int maxTime){
+	int n =g.size();
+	int time=0;
+	int l=0,bot=0;
+	string ans="No";
+	while(l<n&&bot<n){
+		if(l==n-1&&bot==n-1) return ans;
+
+		cout<<"Enter "<<time<<endl;
+		if(time>=maxTime and (l<n-1||bot<n-1)) return ans;
+  	
+    	if(g[bot][l+1]!='#'&&l<n-1){
+        	time++; l++;
+      	}
+      	if(g[bot+1][l]!='#'&&bot<n-1){
+          time++; bot++;
+      	}
+     	if(g[bot+1][l]=='#'&&g[bot][l+1]=='#'){
+       		time--;
+          	if(g[bot-1][l]!='#'&& bot>0){
+            	bot--;
+          	}
+          	else{
+            	if(l>0){
+                	l--;          
+              	}
+	        }
+		}
+	ans="Yes";
+	return ans;
 }
 
 
