@@ -6,6 +6,14 @@ using namespace std;
 #define F first
 #define S second
 
+void print(){
+	cout<<endl;
+}
+template <typename T,typename... Types>
+void print(T var1,Types... var2){
+	cout<<var1<<" ";
+	print(var2...);
+}
 void print_vec(vector<int> a){
 	for(auto i:a){
 		cout<<i<<" ";
@@ -78,39 +86,81 @@ vector<int> First_negative_k_size(vector<int> a,int n,int k){
 }
 
 ///////////// OCCURANCE OF ANAGRAMS ///////////////////
-
-int OccOf_Anagrams(string s,string p){
+//not complete yet /////
+vector<int> findAnagrams(string s,string p){
+	vector<int> v;
 	int n=s.size();
 	int ans=0,i=0,j=0;
-	unordered_map<char,int> u;
+	unordered_map<char,int> u,w;
+	unordered_map<char,bool> check;
 	int count=0;
 	for(auto x:p){
 		u[x]++;
+		check[x]=1;
 	}
 	int k=p.length();
 	while(j<n){
-		if(u.find(s[j])) u[s[j]]--;
+		if(u[s[j]]>0&&check[s[j]]==true) count++;
 		if(j-i+1<k) j++;
 		else if(j-i+1==k){
-			cout<<s[j]<<","<<count<<endl;
-			if(count==k) ans++;
-			if(u[s[i]]>0) u[s[i]]--;
+			if(count==k) {ans++; v.push_back(i);}
+			if(u[s[i]]>0) count--; 
 			i++;j++;
 		}
-		// else if(j-i+1>k){
-		// 	if(u[s[i]]>0) u[s[i]]--;
-		// 	i++;
-		// }
+		else if(j-i+1>k){
+			if(u[s[i]]>0) count--; 
+			i++;
+		}
 	}
-	return ans;
+	return v;
 }
 
-int main(){
-	vector<int> v={12, -1, -7, 8, -15, 30, 16, 28};
-	string s="tomatattopaxt";
-	string p="tta";
-	cout<<OccOf_Anagrams(s,p)<<endl;
+/////////////  MAX'S OF ALL SUBARRAY OF SIZE K //////////////
 
+vector<int> MaximumsOf_All_Sub_Size_K(vector<int> a,int k){
+	int n=a.size();
+	vector<int> v;
+	deque<int> q;
+	int i=0,j=0;
+	while(j<n){
+		while(!q.empty()&&q.back()<a[j]) q.pop_back();
+		q.push_back(a[j]);
+		if(j-i+1<k) j++;
+		else if(j-i+1==k){
+			v.push_back(q.front());
+			if(q.front()==a[i]) q.pop_front();
+			i++;j++;
+		}
+	}
+	return v;
+}
+
+vector<int> MinimumsOf_All_Sub_Size_K(vector<int> a,int k){
+	int n=a.size();
+	vector<int> v;
+	deque<int> q;
+	int i=0,j=0;
+	while(j<n){
+		while(!q.empty()&&a[j]<q.back()) q.pop_back();
+		q.push_back(a[j]);
+		if(j-i+1<k) j++;
+		else if(j-i+1==k){
+			v.push_back(q.front());
+			if(q.front()==a[i]) q.pop_front();
+			i++;j++;
+		}
+	}
+	return v;
+}
+
+
+int main(){
+	vector<int> v={2, 5, -1, 7, -3, -1, -2};
+	string s="tatmxatmtx";
+	string p="mta";
+	// v=findAnagrams(s,p);
+	// print_vec(v);
+	cout<<solve(v,3);
 	
 	return 0;
 }

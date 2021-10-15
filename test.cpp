@@ -49,37 +49,37 @@ bool cmp(string &x, string &y){
 		return x<y;
 	return y<x;
 }
-string reachTheEnd(vector<string> g, int maxTime){
-	int n =g.size();
-	int time=0;
-	int l=0,bot=0;
-	string ans="No";
-	while(l<n&&bot<n){
-		if(l==n-1&&bot==n-1) return ans;
+// string reachTheEnd(vector<string> g, int maxTime){
+// 	int n =g.size();
+// 	int time=0;
+// 	int l=0,bot=0;
+// 	string ans="No";
+// 	while(l<n&&bot<n){
+// 		if(l==n-1&&bot==n-1) return ans;
 
-		cout<<"Enter "<<time<<endl;
-		if(time>=maxTime and (l<n-1||bot<n-1)) return ans;
+// 		cout<<"Enter "<<time<<endl;
+// 		if(time>=maxTime and (l<n-1||bot<n-1)) return ans;
   	
-    	if(g[bot][l+1]!='#'&&l<n-1){
-        	time++; l++;
-      	}
-      	if(g[bot+1][l]!='#'&&bot<n-1){
-          time++; bot++;
-      	}
-     	if(g[bot+1][l]=='#'&&g[bot][l+1]=='#'){
-       		time--;
-          	if(g[bot-1][l]!='#'&& bot>0){
-            	bot--;
-          	}
-          	else{
-            	if(l>0){
-                	l--;          
-              	}
-	        }
-		}
-	ans="Yes";
-	return ans;
-}
+//     	if(g[bot][l+1]!='#'&&l<n-1){
+//         	time++; l++;
+//       	}
+//       	if(g[bot+1][l]!='#'&&bot<n-1){
+//           time++; bot++;
+//       	}
+//      	if(g[bot+1][l]=='#'&&g[bot][l+1]=='#'){
+//        		time--;
+//           	if(g[bot-1][l]!='#'&& bot>0){
+//             	bot--;
+//           	}
+//           	else{
+//             	if(l>0){
+//                 	l--;          
+//               	}
+// 	        }
+// 		}
+// 	ans="Yes";
+// 	return ans;
+// }
 
 
   // this is the main function now
@@ -92,9 +92,6 @@ void solve(){
 	sort(ar,ar+11);
 	int x=90;
 	p=ar;
-	cin>>x;
-	cout<<x<<endl;
-	cout<<"hello";
 											
 }
 
