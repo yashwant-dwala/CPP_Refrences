@@ -114,9 +114,9 @@ int Count(vector<int> a,int l,int r,int x){
 int Rot_Count(vector<int> a,int l,int r,int n){
 	while(l<=r){
 		int mid=l+(r-l)/2;
-		if(a[mid]<a[(n+mid-1)%n]&&a[mid]<a[(mid+1)%n]) { print(a[mid]);return mid;}
-		else if(a[l]>a[mid]) {r=mid-1; print("L",a[mid]);}   // unsorted conditions
-		else if(a[mid]>a[r]) {l=mid+1; print("R",a[mid]);}
+		if(a[mid]<a[(n+mid-1)%n]&&a[mid]<a[(mid+1)%n]) return mid;
+		else if(a[l]>a[mid]) r=mid-1;    // unsorted conditions
+		else if(a[mid]>a[r]) l=mid+1; 
 		else r=mid-1;  // correction if stuck
 	}
 	return 0;
@@ -221,32 +221,75 @@ int Min_Diff_Ele_Sort_Arr(vector<int> a, int l,int r,int x){
 
 //////////////// Peak Element UNSORTED ARR **(IMP)** ////////////////
 
-								// error //
+int Peak_Ele(vector<int> a,int l,int r){
+	while(l<=r){
+		int m=l+(r-l)/2;
+		if((m==0&&a[m]>a[m+1])||(m==a.size()-1&&a[m]>a[m-1])) return m;
+		else if(m>0&&m<a.size()-1){
+			if(a[m]>a[m-1]&&a[m]>a[m+1]) return m;
+			else if(a[m]<a[m-1]) r=m-1;
+			else l=m+1;
+		}
+	}
+	return -1;
+}
 
-// int Peak_Ele(vector<int> a,int l,int r){
-// 	while(l<=r){
-// 		int mid=l+(r-l)/2;
-// 		if(mid==0&&a[mid]>a[mid+1]) return mid;
-// 		else if(mid==a.size()-1&&a[mid]>a[mid-1]) return mid;
-// 		else if(mid>0&&mid<a.size()-1){
-// 			if(a[mid]>a[mid-1]&&a[mid]>a[mid+1]) return mid;
-// 		}
-// 		else if(a[mid]<a[mid-1]) r=mid-1;
-// 		else l=mid+1;
-// 	}
-// 	return -1;
-// }
+//////////// Bitonic Arr Max Ele  /////////////////////////
 
-////////////
+int Peak_Ele_Bitonic(vector<int> a,int l,int r){
+	while(l<=r){
+		int m=l+(r-l)/2;
+		if(a[m]>a[m-1]&&a[m]>a[m+1]) return m;
+		else if(a[m]<a[m-1]) r=m-1;
+		else l=m+1;
+	}
+	return -1;
+}
+
+///////////// Search Ele in Bitonic Arr ////////////////
+
+			//Error Serarch last Ele 
+
+int Search_Ele_Bitonic(vector<int> a,int l,int r,int x){
+	int y=Peak_Ele_Bitonic(a,l,r);
+	return max(B_Search_Both_Order(a,l,y,x),B_Search_Both_Order(a,y,r,x));
+}
+
+//////// Allocate Min No. Of Max Pages Books ///////////////////
+bool isValid(int mid,int child,vector<int> a){
+	int student=1,sum=0;
+	for(auto x:a){
+		sum+=x;
+		if(sum>mid){
+			student++;
+			sum=x;
+		}
+		if(student>child) return false;
+	}
+	return true;
+}
+int Allocate_Min_MaxNoPages(vector<int> a,int childs){
+	int n=a.size();
+	int low=0,high=0,ans=-1;
+	if(childs>a.size()) return ans;
+	for(int i=0;i<n;i++){
+		if(low<a[i])low=a[i];
+		high+=a[i];
+	}
+	while(low<=high){
+		int mid=low+(high-low)/2;
+		if(isValid(mid,childs,a)){ ans=mid; high=mid-1;}
+		else low=mid+1;
+	}
+	return ans;
+}
 
 //////////////////////////////////////////////
 
 int main(){
 	vector<int> v=get_vector();
-	int k=6;
-	int l=0,r=v.size()-1;
-
-	cout<<B_S_Nearly_Sort(v,l,r,k);
+	int k=5;
+	cout<<Allocate_Min_MaxNoPages(v,k);
 
 	return 0;
 }
