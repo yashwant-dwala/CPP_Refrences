@@ -1,9 +1,33 @@
 sort(ar,ar+11);//automatic
 swap(a,b);//automatic
 __gcd(a,b); //automatic
+next_permutation(s.begin(),s.end());
+s.substr(index,length);
 
 
- 
+int maxSum_SubArr_MaxLen_KADANES(vector<int> a){
+    int Curr=0,Max=0,st=0,ed=0;
+    for(auto x:a){
+        Curr+=x;
+        Max=max(Max,Curr);
+        if(Curr<0) Curr=0;
+        if(st==0&&Curr>=0)st=x;
+        else if(Curr==Max&&st!=0) ed=x;
+    }
+    return Max;
+}
+
+int findSubarray_withSum_0(vector<int> a, int n ) {
+    int Min=0,Max=0,sum=0;
+    for(auto x:a){
+        if(x<0) Min+=x;
+        else Max+=x;
+        sum=Max+Min;
+        print(Max,Min,sum,x);
+    }
+    return sum;
+}
+
 int minJumps(int arr[], int n){
     if (n <= 1)
         return 0;

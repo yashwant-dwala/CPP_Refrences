@@ -108,4 +108,3 @@ int main(){
 	cerr<<"Time elapsed: "<<(double)(clock()-t1)/1000<<" s"<<endl;
 }
 
-
