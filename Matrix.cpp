@@ -1,45 +1,8 @@
 #include<bits/stdc++.h>
+#include "Template.cpp"
 using namespace std;
 
-//////////////////   TEMPLATE START ///////////////////////
-#define ll long long int
-#define F first
-#define S second
-
-void print_vec(vector<int> a){
-    for(auto i:a){
-        cout<<i<<" ";
-    }
-    cout<<endl;
-}
-void print_mat(vector<vector<int>> m){
-    int N=m.size();
-    int M=m[0].size();
-    for(int i=0;i<N;i++){
-        for(int j=0;j<M;j++)
-            cout<<m[i][j]<<" ";
-        cout<<endl;
-    }
-}
-vector<vector<int>> get_N_M_Mat(){
-    int N,M;
-    cin>>N;
-    cin>>M;
-    vector<vector<int>> v;
-    for(int i=0;i<N;i++){
-        vector<int> a;
-        for(int j=0;j<M;j++){
-            int x;
-            cin>>x;
-            a.push_back(x);
-        }
-        v.push_back(a);
-    }
-    return v;
-}
-
-//////////////////////  TEMPLATE END /////////////////////////////////
-
+//////////////////////////////////////////////////////////////
 
 vector<vector<int>> sortedMatrix(vector<vector<int>> v) {
     vector<int> temp;

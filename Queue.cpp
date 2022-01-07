@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include "Template.cpp"
 using namespace std;
 
 void print_Q(queue<int> q){
@@ -85,14 +86,11 @@ string FirstNonRepeating(string a){
    return ans;
 }
 
-int main(){
+void Solve(){
 	queue<int> q;
 	q.push(5);
 	q.push(0);
 	q.push(9);
 	q.push(7);
 	q.push(5);
-
-	return 0;
-
 }

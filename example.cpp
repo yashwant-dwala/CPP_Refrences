@@ -1,50 +1,8 @@
 #include<bits/stdc++.h>
+#include "Template.cpp"
 using namespace std;
 
-//////////////////   TEMPLATE START ///////////////////////
-#define ll long long int
-#define F first
-#define S second
-#define rep(i,st,end) for(int i=st;i<end;i++)
-
-void print(){
-	cout<<endl;
-}
-template <typename T,typename... Types>
-void print(T var1,Types... var2){
-	cout<<var1<<" ";
-	print(var2...);
-}
-
-vector<int> get_vector(){
-	int N;
-	cin>>N;
-	vector<int> v;
-	for(int i=0;i<N;i++){
-		int x;
-		cin>>x;
-		v.push_back(x);
-	}
-	return v;
-}
-void print_vec(vector<int> a){
-	for(auto i:a){
-		cout<<i<<" ";
-	}
-	cout<<endl;
-}
-void print_mat(vector<vector<int>> m){
-	int N=m.size();
-	int M=m[0].size();
-	for(int i=0;i<N;i++){
-		for(int j=0;j<M;j++)
-			cout<<m[i][j]<<" ";
-		cout<<endl;
-	}
-	cout<<endl;
-}
-
-//////////////////////  TEMPLATE END /////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 int factorial(int n)
 {
     int fact = 1;
@@ -70,33 +28,47 @@ int countDistinctPermutations(string str)
  
     return factorial(length) / fact;
 }
-int main(){
+void solve1(){
+	int n; cin>>n;
+	int a[100005];
+	int pos[100005];
+	int next[100005];
+	for(int i=0;i<n;i++) cin>>a[i+1];
+	for(int i=0;i<=n;i++) pos[i]=n+1;
+
+	for(int i=n;i>=0;i++){
+		next[i]=pos[a[i]];
+		pos[a[i]]=i;
+	}
+	int x=0,y=0,ans=0;
+	for(int i=1;i<=n;i++){
+		if(a[x]==a[i]){
+			ans+=(a[y]!=a[i]);
+			y=i;
+		}
+		else if(a[y]==a[i]){
+			ans+=(a[x]!=a[i]);
+			x=i;
+		}
+		else if(next[x]<next[y]){
+			ans+=(a[x]!=a[i]);
+			x=i;
+		}
+		else{
+			ans+=(a[y]!=a[i]);
+			y=i;
+		}
+	}
+
+	cout<<ans<<endl;
+	
+	
+}
+void solve(){
 	int t;
 	cin>>t;
 	while(t--){
-		int n;
-		cin>>n;
-		vector<int> v(n);
-		for(int i=0;i<n;i++){
-			cin>>v[i];
-		}
-	    map<int, int> F;
-	    long long int ans=1;
-	    int mod7 = 1e9+7;
-
-	    for(int i:v)F[i]++;
-	    
-	    for(auto p:F){
-	        int f=p.second;
-	        ans*=(f+1);
-	        ans%=mod7;
-	    }
-		ans--;
-		cout<<ans<<endl;
-
-
+		solve1();
 	}
-	
-	return 0;
 }
 

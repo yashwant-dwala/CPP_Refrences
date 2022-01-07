@@ -1,37 +1,10 @@
 #include<bits/stdc++.h>
+#include "Template.cpp"
 using namespace std;
 
-//////////////////   TEMPLATE START ///////////////////////
-#define ll long long int
-#define F first
-#define S second
 
-void print(){
-	cout<<endl;
-}
-template <typename T,typename... Types>
-void print(T var1,Types... var2){
-	cout<<var1<<" ";
-	print(var2...);
-}
-void print_vec(vector<int> a){
-	for(auto i:a){
-		cout<<i<<" ";
-	}
-	cout<<endl;
-}
-void print_mat(vector<vector<int>> m){
-	int N=m.size();
-	int M=m[0].size();
-	for(int i=0;i<N;i++){
-		for(int j=0;j<M;j++)
-			cout<<m[i][j]<<" ";
-		cout<<endl;
-	}
-	cout<<endl;
-}
 
-//////////////////////  TEMPLATE END /////////////////////////////////
+//////////////////////////////////////////////////////////////
 
 int maxWindowSUM_K(vector<int> &a,int n,int k){
 	int msum=0,wsum=0;
@@ -154,13 +127,10 @@ vector<int> MinimumsOf_All_Sub_Size_K(vector<int> a,int k){
 }
 
 
-int main(){
+void Solve(){
 	vector<int> v={2, 5, -1, 7, -3, -1, -2};
 	string s="tatmxatmtx";
 	string p="mta";
-	// v=findAnagrams(s,p);
-	// print_vec(v);
-	cout<<solve(v,3);
-	
-	return 0;
+	v=findAnagrams(s,p);
+	print_vec(v);
 }

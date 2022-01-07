@@ -1,39 +1,13 @@
 #include<bits/stdc++.h>
+#include "Template.cpp"
 using namespace std;
 
-//////////////////   TEMPLATE START ///////////////////////
+//////////////////////////////////////////////////////////////////////////
 
-#define ll long long int
-#define F first
-#define S second
-#define rep(i,Start,End) for(int i=Start;i<End;i++)
-
-void print(){
-	cout<<endl;
-}
-template <typename T,typename... Types>
-void print(T var1,Types... var2){
-	cout<<var1<<" ";
-	print(var2...);
-}
-void print_vec(vector<int> a){
-	for(auto i:a){
-		cout<<i<<" ";
-	}
-	cout<<endl;
-}
-vector<int> get_vector(int n){
-	vector<int> v;
-	for(int i=0;i<n;i++){
-		int x;
-		cin>>x;
-		v.push_back(x);
-	}
-	return v;
-}
-
-//////////////////////  TEMPLATE END /////////////////////////////////
 //  Max size of arr : 10^7, HASHING IS POSSIBLE Below this range only
+
+// because of this some ans are required modulo 10^9 + 7 
+// which is best for 2^64 bit no
 
 const int N=1e7+10; // 10^7 (1 SECOND) se thoda jada +10
 ll Fact[N];
@@ -58,10 +32,8 @@ ll Factorial(ll X){
 
 //////////////////////////
 
-int main(){
-	int n;
-	cin>>n;
-	vector<int> v=get_vector(n);
+void Solve(){
+	vector<int> v=get_vector();
+	int n=v.size();
 	rep(i,0,n) print(Factorial(v[i]));
-	return 0;
 }

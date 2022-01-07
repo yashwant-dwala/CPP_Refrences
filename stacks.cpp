@@ -1,29 +1,8 @@
 #include<bits/stdc++.h>
+#include "Template.cpp"
 using namespace std;
 
-//////////////////   TEMPLATE START ///////////////////////
-#define ll long long int
-#define F first
-#define S second
-
-void print_arr(vector<int> a){
-	for(auto i:a){
-		cout<<i<<" ";
-	}
-	cout<<endl;
-}
-void print_mat(vector<vector<int>> m){
-	int N=m.size();
-	int M=m[0].size();
-	for(int i=0;i<N;i++){
-		for(int j=0;j<M;j++)
-			cout<<m[i][j]<<" ";
-		cout<<endl;
-	}
-	cout<<endl;
-}
-
-//////////////////////  TEMPLATE END /////////////////////////////////
+//////////////////////////////////////////////////////
 
 int precedence(char c){
 	if(c=='^')
@@ -165,7 +144,7 @@ void stock_spair(vector<int> a,int n){
 	vector<int> v=NGL_index(a,n);
 	for(int i=0;i<n;i++)
 		v[i]=i-v[i];
-	print_arr(v);
+	print_vec(v);
 }
 
 ///////////////   MAX AREA HISTOGRAM  //////////////////
@@ -273,14 +252,12 @@ vector<int> nsr(vector<int> a, int n){
 
 ////////////////////////////////////////////////////////
 
-int main() {
+void Solve() {
 	vector<int> a={4, 8, 5, 2, 25};
 	// a.erase(a.begin()+2);
 	string s="((d-b))";
 	// cout<<redundent(s);
 	a=nsr(a,5);
-	print_arr(a);
+	print_vec(a);
 	
-
-	return 0;
 }

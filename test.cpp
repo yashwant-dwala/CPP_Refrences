@@ -31,17 +31,6 @@ template<class T> using oset=tree<T, null_type, less<T>, rb_tree_tag, tree_order
 #define NO_OF_CHARS 256
 #define minpq priority_queue <ll, vector<ll>, greater<ll>>
 #define maxpq priority_queue<ll> 
-#define R 3
-#define C 3
-void sout(){
-	cout<<endl;
-}
-template <typename T,typename... Types>
-void sout(T var1,Types... var2){
-	cout<<var1<<" ";
-	sout(var2...);
-}
-
 //////////////////////  TEMPLATE END /////////////////////////////////
 
 bool cmp(string &x, string &y){

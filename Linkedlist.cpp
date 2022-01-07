@@ -102,6 +102,14 @@ Node* get_Nodes(linkedList l){
 	l.head=recReverse(l.head);
 	return l.head;
 }
+Node* makeCircular(Node* head){
+	Node* t=head;
+	while(t->next){
+		t=t->next;
+	}
+	t->next=head;
+	return head;
+}
 //////////////////////  TEMPLATE END /////////////////////////////////
 
 
@@ -365,34 +373,18 @@ void Y_shape(Node* a,Node* b){
 
 // merge sort
 Node* merge(Node* a,Node *b){
-	Node*start;
-	Node* temp;
-	start=temp;
-	while(a&&b){
-		if(a->data<=b->data){
-			temp->next=a;
-			a=a->next;
-			temp=temp->next;
-		}
-		else{
-			temp->next=b;
-			b=b->next;
-			temp=temp->next;
-		}
+	if(a==NULL) return b;
+	if(b==NULL) return a;
+	Node* result;
+	if(a->data<b->data){
+		result=a;
+		result->next=merge(a->next,b);
+	} 
+	else{
+		result=b;
+		result->next=merge(a,b->next);
 	}
-	while(a){
-			temp->next=a;
-			a=a->next;
-			temp=temp->next;
-	}
-	while(b){
-			temp->next=b;
-			b=b->next;
-			temp=temp->next;
-	}
-	temp->next=NULL;
-	start=start->next;
-	return start;
+	return result;
 }
 void split(Node* &a,Node* &b,Node* head){
 	a=head;
@@ -413,11 +405,115 @@ void mergeSort(Node* &head){
 	Node* b;
 	if(head==NULL||head->next==NULL) return;
 	split(a,b,h);
-	// mergeSort(a);
 	mergeSort(b);
+	mergeSort(a);
 	head=merge(a,b);
 }
 
+// Quick sort
+void partetion(Node* &l,Node* &r,Node* &head,int pivot){
+	Node* lp=l;
+	Node* rp=r;
+	Node* p=head;
+	pivot-=1;
+	while(pivot--){
+		p=p->next;
+	}
+	print("p ",p->data);
+	Node* t=head;
+	Node* prev;
+	while(t!=NULL){
+		print(t->data);
+		if(t->data<=p->data&&t!=p){
+			print("l ",t->data);
+			prev=t;
+			t=t->next;
+			prev->next=NULL;
+			lp=lp->next;
+			lp->next=prev;
+			
+		}
+		else{
+			print("r ",t->data);
+			prev=t;
+			t=t->next;
+			prev->next=NULL;
+			rp=rp->next;
+			rp->next=prev;
+		}
+		
+	}
+	lp=l;
+	while(lp){
+		lp=lp->next;
+	}
+	lp=p;
+	p->next=NULL;
+	lp->next=r;
+
+	cout<<"left : "; recDisplay(l);
+	cout<<"mid : "; recDisplay(p);
+	cout<<"right : "; recDisplay(r);
+}
+void QuickSort(Node* &head){
+	Node* a=new Node(-1);
+	Node* b=new Node(-1);
+	if(head==NULL||head->next==NULL) return;
+	partetion(a,b,head,3);
+	QuickSort(a);
+	QuickSort(b);
+}
+// Delete ele from a Circular List.
+Node* removeEleCircular(Node* head,int k){
+	// 1 ele error
+	if(head==NULL||(head->data==k&&head->next==NULL)) return NULL;
+	if(head->data==k) return head->next;
+	Node* curr=head,*left=head;
+	while(curr->data!=k&&curr){
+		left=curr;
+		curr=curr->next;
+	}
+	left->next=curr->next;
+	delete curr;
+	return head;
+}
+
+// multiply 2 Nos as linked list
+// large so return modulo 10^9 +7;
+ll multiplyTwoListNumbers(Node* a,Node* b){
+	Node* t=a;
+	ll mod=1000000000+7;
+	ll x=0,y=0;
+	while(t){
+		x= x*10 + t->data;
+		t=t->next;
+	}
+	t=b;
+	while(t){
+		y= y*10 + t->data;
+		t=t->next;
+	}
+	
+	return (x*y)%mod;
+}
+
+// First non-repeating character in a stream
+string FirstNonRepeating(Node* head){
+	string s="";
+	vector<int> v(26,0);
+	Node* temp=head;
+	list<int> l;
+	while(temp){
+		l.push_back(temp->data);
+		v[temp->data]++;
+		while(v[l.front()]!=1){
+			l.pop_front();
+		}
+		l.empty()?s+='#':s+=to_string(l.front());
+		temp=temp->next; 
+	}
+	return s;
+}
 
 //////////////////////////
 
@@ -425,9 +521,7 @@ int main(){
 	linkedList l;
 	linkedList L;
 	l.head=get_Nodes(l);
-	L.head=get_Nodes(L);
-	// l.head=merge(l.head,L.head);
-	mergeSort(l.head);
-	recDisplay(l.head);
+	print(FirstNonRepeating(l.head));
+	// l.display();
 	return 0;
 }

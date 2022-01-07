@@ -1,53 +1,11 @@
 #include<bits/stdc++.h>
+#include "Template.cpp"
 using namespace std;
 
-//////////////////   TEMPLATE START ///////////////////////
-#define ll long long int
-#define F first
-#define S second
-#define rep(i,st,end) for(int i=st;i<end;i++)
 
-void print(){
-	cout<<endl;
-}
-template <typename T,typename... Types>
-void print(T var1,Types... var2){
-	cout<<var1<<" ";
-	print(var2...);
-}
-
-vector<int> get_vector(){
-	int N;
-	cin>>N;
-	vector<int> v;
-	for(int i=0;i<N;i++){
-		int x;
-		cin>>x;
-		v.push_back(x);
-	}
-	return v;
-}
-void print_vec(vector<int> a){
-	for(auto i:a){
-		cout<<i<<" ";
-	}
-	cout<<endl;
-}
-void print_mat(vector<vector<int>> m){
-	int N=m.size();
-	int M=m[0].size();
-	for(int i=0;i<N;i++){
-		for(int j=0;j<M;j++)
-			cout<<m[i][j]<<" ";
-		cout<<endl;
-	}
-	cout<<endl;
-}
-
-//////////////////////  TEMPLATE END /////////////////////////////////
+//////////////////////////////////////////////////////
 
 //  Merge Sort 
-
 
 void merge(int left,int mid ,int right, int a[],int n){
 	int n1 = mid-left+1;
@@ -84,7 +42,7 @@ void mergeSort(int left,int right, int a[],int n){
 
 // Quick sort 
 int partrtion(vector<int> &v,int l,int r){
-	int i=l,j=r;
+	int i=l,j=r; // returns correct value of pivot (always left)
 	int pivot=l;
 	while(i<j){
 		do{
@@ -209,8 +167,8 @@ void doubleHelix(){
 }
 
 
-int main(){
+void Solve(){
 	
 	
-	return 0;
+
 }
