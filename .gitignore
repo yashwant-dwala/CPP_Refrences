@@ -2,8 +2,10 @@
 *.in
 verma.cpp
 example.cpp
+CF.cpp
 *.pdf
 *.jpg
 *.img
 *.png
+*.py
 

@@ -4,6 +4,13 @@ using namespace std;
 
 //////////////////////////////////////////////////////////////////////////
 
+////......... C O N C E P T .........
+
+//     A = B + C * N   if ( B, C < N )
+//     A % N = B
+//     A / N = C
+//...................................
+
 //  Max size of arr : 10^7, HASHING IS POSSIBLE Below this range only
 
 // because of this some ans are required modulo 10^9 + 7 

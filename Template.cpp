@@ -10,13 +10,19 @@ using namespace std;
 #define S second
 #define rep(i,st,en) for(ll i=st;i<en;i++)
 
+// type(x).name();
 #define typeVector_i "St6vectorIiSaIiEE" // string hai
 #define typeString "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"
 #define typePair_i_i "St4pairIiiE" 
 #define typeUnordered_map_i_i "St13unordered_mapIiiSt4hashIiESt8equal_toIiESaISt4pairIKiiEEE"
 #define typeMap_i_i "St3mapIiiSt4lessIiESaISt4pairIKiiEEE"
 
+#define minHeap priority_queue<int,vector<int>,greater<int>>
+
+// main Function
 void Solve();
+
+////////////////////////  printing purpose /////////////////////////
 void print(){
 	cout<<endl;
 }
@@ -62,6 +68,8 @@ void print_mat(vector<vector<int>> m){
 	}
 	cout<<endl;
 }
+
+//////////////////////// take Inputs ///////////////////////////
 template<class T> vector<T> get_vector(T type){
 	int N;
 	cin>>N;
@@ -96,6 +104,10 @@ vector<vector<int>> get_N_M_Mat(){
     }
     return v;
 }
+
+////////////////// Data Variables /////////////////
+
+
 
 
 

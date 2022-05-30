@@ -98,7 +98,7 @@ int height(Node* root){
 	return 1+max(height(root->left),height(root->right));
 }
 int diaNode(Node* root){
-	// longest distaance b/w any 2 nodes including that
+	// longest distance b/w any 2 nodes including that
     if (root==NULL) return 0;
     return (1+height(root->left)+height(root->right));
 }
@@ -676,15 +676,64 @@ bool isDeadEnd(Node* root){
 	}
 	return 0;
 }
+////////////// BST to MinHeap ////////////
+int i=0;
+void intFill(Node* root,vector<int> &v){
+	if(root==NULL) return;
+	intFill(root->left,v);
+	v.push_back(root->data);
+	intFill(root->right,v);
+}
+void heapify(Node* root,vector<int> v){
+	if(root==NULL) return ;
+	root->data=v[i++];
+	heapify(root->left,v);
+	heapify(root->right,v);
+}
+void BstToMinHeap(Node* root){
+	vector<int> v;
+	intFill(root,v);
+	print_vec(v);
+	heapify(root,v);
+}
+
+
+/////........... D P   O N   B I N A R Y   T R E E S .........../////////
+
+unordered_map<Node*,int> map;
+
+int DP_diameter(Node* root){
+	if(root==NULL) return 0;
+	
+	if(map.find[root]!=map.end()) return map[root];
+	
+	int l=height(root->left);
+	int r=height(root->right);
+
+    // Max dis b/w any 2 nodes including that node
+	int temp=1+height(root->left)+height(root->right);
+
+	// memoization
+	int ld=0,rd=0;
+	ld = (map.find[root->left]!=map.end()) map[root->left]?DP_diameter(root->left);
+	rd = (map.find[root->right]!=map.end()) map[root->right]?DP_diameter(root->right);
+	
+	// Max dis b/w any 2 nodes excluding that node
+	int x=max(ld,rd);
+	return map[root]=max(x,temp);
+}
+
 ////////////////////////////////////////////////////
 
 
 
 //////////////////////////
 
-void solve(){
+void Solve(){
+
 	Node* root=NULL;
 	root=get_Nodes(root);
+	BstToMinHeap(root);
 	allOrder(root);
 	cout<<endl;
 }

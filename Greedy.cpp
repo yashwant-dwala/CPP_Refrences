@@ -78,15 +78,13 @@ vector<string> huffmanCodes(string S,vector<int> f,int n)
     return s;
 }     
 
-
 //////////////////////////
 
 void Solve(){
-	vector<int> v;
-	string s="qwertyuiopasdfghjklzxcvbn";
-	v=get_vector(1); //type required
-	vector<string> y=huffmanCodes(s,v,v.size());
-	print_vec(y);
+	// vector<int> v=get_vector(1);
+	// string s="qwertyuiopasdfghjklzxcvbn";
+	// vector<string> y=huffmanCodes(s,v,v.size());
+	// print_vec(y);
 }
 
 // 0000 0001 00100 001010 001011 0011 0100 0101 0110 0111 1000 100100 100101 10011 1010 1011 1100 1101 11100 11101 111100 1111010 11110110 11110111 11111 
