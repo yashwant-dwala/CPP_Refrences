@@ -65,18 +65,17 @@ int Count(vector<int> a,int l,int r,int x){
 
 ////////////// ROTATION COUNT /////////////////////
 
-// 6                          // error for this input corrected // 
-// 11 18 20 2 6 8           
-
 int Rot_Count(vector<int> a,int l,int r,int n){
-	while(l<=r){
-		int mid=l+(r-l)/2;
-		if(a[mid]<a[(n+mid-1)%n]&&a[mid]<a[(mid+1)%n]) return mid;
-		else if(a[l]>a[mid]) r=mid-1;    // unsorted conditions
-		else if(a[mid]>a[r]) l=mid+1; 
-		else r=mid-1;  // correction if stuck
-	}
-	return 0;
+	// pivot or smallest of arr
+    int n=v.size();
+    int l=0,r=n-1;
+    while(l<r){
+        int m=(l+r)/2;
+        if(v[m]<v[r]) r=m; // left half is promising
+        else l=m+1; // right half is promising
+    }
+    // r==l
+    return r;
 }
 
 ///////////////////  Search of ele in Rotated Sort Arr  ///////////////
