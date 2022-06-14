@@ -1,13 +1,15 @@
 #include<bits/stdc++.h>
+#include "Helper_Functions.cpp"
 using namespace std;
 
 // Solve == main now
 // typeid(variable).name() gives data type
 
 //////////////////   TEMPLATE START ///////////////////////
-#define ll long long int
+#define ll long long
 #define F first
 #define S second
+#define mod 1000000007
 #define rep(i,st,en) for(ll i=st;i<en;i++)
 
 // type(x).name();
@@ -68,8 +70,19 @@ void print_mat(vector<vector<int>> m){
 	}
 	cout<<endl;
 }
+///////////////.......................................
 
-//////////////////////// take Inputs ///////////////////////////
+
+//////////////////////// Take Inputs ///////////////////////////
+vector<int> get_vec(int N){
+    vector<int> v;
+    for(int i=0;i<N;i++){
+        int x;
+        cin>>x;
+        v.push_back(x);
+    }
+    return v;
+}
 template<class T> vector<T> get_vector(T type){
 	int N;
 	cin>>N;
@@ -104,6 +117,8 @@ vector<vector<int>> get_N_M_Mat(){
     }
     return v;
 }
+//////////...................................
+
 
 ////////////////// Data Variables /////////////////
 
