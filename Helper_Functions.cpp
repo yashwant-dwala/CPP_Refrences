@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll long long
+#define ll long long 
 #define mod 1000000007
 
 
@@ -20,7 +20,32 @@ ll combination(ll n,ll r){
     ll ans = combination(n-1,r-1)%mod + combination(n-1,r)%mod ;
     return nCrdp[n][r] = (ans)%mod;
 }
+//....faster
+ll combination(int n,int r){
+    int C[r+1];
+    memset(C, 0, sizeof(C));
+ 
+    C[0] = 1;
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = min(i, r); j > 0; j--)
+            C[j] = (C[j] + C[j-1])%mod;
+    }
+    return C[r];
+}
 // .................................
+// P O W E R
+ll power(ll a, ll b) {
+a %= mod;
+ll ans = 1;
+while (b) {
+    if (b & 1) ans = (a * ans) % mod;
+    a = (a * a) % mod;
+    b /= 2;
+}
+return ans % mod;
+}
+// .............................
 
 
 ////////////////......................................
