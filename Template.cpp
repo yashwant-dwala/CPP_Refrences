@@ -6,7 +6,7 @@ using namespace std;
 // typeid(variable).name() gives data type
 
 //////////////////   TEMPLATE START ///////////////////////
-#define ll long long
+#define ll long long int
 #define F first
 #define S second
 #define mod 1000000007
@@ -119,6 +119,28 @@ vector<vector<int>> get_N_M_Mat(){
 }
 //////////...................................
 
+///////////////////// Special Data Structure (D S U) /////////////////////
+vector<int> par; // par[i]=i 
+vector<int> r; // 0  rank
+
+int findPar(int a){
+    if(par[a]==a) return a;
+    return par[a] = findPar(par[a]); // path compression
+}
+
+void Union(int a,int b){
+    b=par[b]; 
+    a=par[a];
+    if(r[a]<r[b]){
+        par[a]=b;
+    }
+    else if(r[b]<r[a]) par[b]=a;
+    else{
+        par[b] =a;
+        r[a]++;
+    }
+}
+/////////....................................
 
 ////////////////// Data Variables /////////////////
 
