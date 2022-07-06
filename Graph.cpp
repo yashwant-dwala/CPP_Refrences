@@ -11,94 +11,129 @@ using namespace std;
 // 4 6
 
 //////////////////// G R A P H S //////////////////////////////////
-#define LENGTH 1000001
 
-struct Graph
-{											
-	int node;								
-	int edge;								
-	vector<int> *adj;						
-	Graph(int n,int e){					 
-		node=n; 										  
-		edge=e;								
-		this->adj= new vector<int> [n+1];
-	}
+class Graph
+{
+	public:
+		Graph* G;
+		int N ,E;
+		int timer = 0; 
+		vector<int> *adj;
+		vector<int> vis;
+		vector<int> dist;
+		vector<int> lowtime;
+		vector<int> intime;
+		bool directed=false;
+
+		Graph(bool d){
+			cin>>N>>E;
+			directed = d;
+			timer=0;
+			this->adj = new vector<int> [N+1];
+			vis = vector<int> (N+1,0);
+			dist = vector<int> (N+1,0);
+			intime = vector<int> (N+1,0);
+			lowtime = vector<int> (N+1,INT_MAX);
+		};
+		~Graph(){ };
+
+		void ClearGraph(){
+			timer=0;
+			vis = vector<int> (N+1,0);
+			dist = vector<int> (N+1,0);
+			intime = vector<int> (N+1,0);
+			lowtime = vector<int> (N+1,INT_MAX);
+		}
+		void BuildGraph(){
+			for(int i=0;i<N+1;i++)	adj[i].clear();
+			int e = E;
+			while(e--){
+				int a,b;
+				cin>>a>>b;
+				adj[a].push_back(b);
+				if(directed==false)	adj[b].push_back(a);
+			}
+		};
+		void DFS(int v){
+			vis[v]=1;
+			print(v);
+			for(int child: adj[v]){
+				if(vis[child]==0) DFS(child);
+			}
+		};
+		void BFS(int v){    // mostly for distance finding
+			queue<int> q;
+			q.push(v);
+			vis[v]=1,dist[v]=0;
+			while(!q.empty()){
+				int curr=q.front(); q.pop();
+				for(int ch: adj[curr])
+					if(vis[ch]==0)
+						q.push(ch),	vis[ch]=1, dist[ch]=dist[curr]+1;		 
+			}
+			print_vec(dist);
+		};
+		bool dfsUndirected_Cycle(int v,int par){
+			vis[v]=1;
+			for(int ch:adj[v]){ // order important //
+				if(vis[ch]==0){
+					if(dfsUndirected_Cycle(ch,v)==1) return 1;
+				}
+				else {
+					if(ch!=par) return 1;
+				}
+			}
+			return false;
+		};
+		bool dfsDirected_Cycle(int v){
+			vis[v]=1;
+			for(int ch:adj[v]){
+				if(vis[ch]==0 and dfsDirected_Cycle(ch)) return 1;
+				else if(vis[ch]==1) return 1;	
+			}
+			vis[v]=2;
+			return false;
+		};
+		void detectCycle(){
+			for(int i=1;i<=N;i++){
+				if(directed==false){
+					if(vis[i]==0 and dfsUndirected_Cycle(i,-1)) {
+						print("yes it is Cyclic.");
+						return;
+					}				
+				}
+				else{
+					if(vis[i]==0 and dfsDirected_Cycle(i)) {
+						print("yes it is Cyclic.");
+						return;
+					}
+				} 
+			}		
+			print("No, it is not Cyclic.");
+		};
+		void Print_Bridges_Dfs(int n,int p){
+		    vis[n] = 1;
+		    intime[n]=lowtime[n]= timer++;
+		    for(int ch:adj[n]){
+		        if(ch==p) continue;
+		        else if(vis[ch]==1){
+		            //back - edge reduce lowtime
+		            lowtime[n] = min(lowtime[n],intime[ch]);
+		        }
+		        else{
+		            // forward edge
+		            Print_Bridges_Dfs(ch,n);
+		            if(lowtime[ch]>intime[n]){
+		                //bridge
+		                print("bridge :", n,ch);
+		            }
+		            lowtime[n] = min(lowtime[n],lowtime[ch]);
+		        }
+		    }
+		};
 };
 
-////////////// Global variables
-int N,E;
-Graph* G; 
-int vis[LENGTH]; // 0 since global
-int dist[LENGTH];
-
-
-void BuildGraph(int n,int e,bool directed){
-	N=n; E=e;
-	G= new Graph(n,e);
-	for(int i=0;i<N+1;i++)	G->adj[i].clear();
-	while(e--){
-		int a,b;
-		cin>>a>>b;
-		G->adj[a].push_back(b);
-		if(directed==false)	G->adj[b].push_back(a);
-	}
-}
-
-void DFS(int v){
-	vis[v]=1;
-	print(v);
-	for(int child: G->adj[v]){
-		if(vis[child]==0) DFS(child);
-	}
-}
-
-void BFS(int v){    // mostly for distance finding
-	queue<int> q;
-	q.push(v);
-	vis[v]=1,dist[v]=0;
-	while(!q.empty()){
-		int curr=q.front(); q.pop();
-		print(curr,dist[curr]);
-		for(int ch: G->adj[curr])
-			if(vis[ch]==0)
-				q.push(ch),	vis[ch]=1, dist[ch]=dist[curr]+1;		 
-	}
-}
-bool dfsUndirected_Cycle(int v,int par){
-	vis[v]=1;
-	for(int ch:G->adj[v]){ // order important //
-		if(vis[ch]==0){
-			if(dfsUndirected_Cycle(ch,v)==1) return 1;
-		}
-		else {
-			if(ch!=par) return 1;
-		}
-	}
-	return false;
-}
-bool dfsDirected_Cycle(int v){
-	vis[v]=1;
-	for(int ch:G->adj[v]){
-		if(vis[ch]==0){
-			if(dfsDirected_Cycle(ch)==1) return 1;
-		}else{
-			if(vis[ch]==1) return 1;	
-		} 
-	}
-	vis[v]=2;
-	return false;
-}
-bool detectCycle(bool directed){
-	for(int i=0;i<G->node+1;i++){
-		if(directed==false){
-			if(vis[i]==0 and dfsUndirected_Cycle(i,-1)) return 1;				
-		}
-		else{
-			if(vis[i]==0 and dfsDirected_Cycle(i)) return 1;
-		} 
-	}		
-	return 0;
-}
+///////////////////////////////////////////////////
 
 /////////////////  Steps by Knight /////////
 // (X,Y) to target (Tx,Ty), steps = ??
@@ -182,15 +217,16 @@ void floodFill(vector<vector<int>> &img,int r,int c,int newColor){
 
 
 void Solve(){
-	// cin>>N>>E;
-	// BuildGraph(N,E,false);
-	// print(detectCycle(false));
+	Graph G = Graph(false);
+	G.BuildGraph();
+	print("DFS :");
+	G.DFS(1);
+	G.ClearGraph();
+	print("BFS (1 based indexed): ");
+	G.BFS(1);
+	G.ClearGraph();
+	G.detectCycle();
+	G.ClearGraph();
+	G.Print_Bridges_Dfs(1,-1);
 
-	// int X=1,Y=3,Tx=3,Ty=1,n=3; 
-	// minStepToReachTarget(X,Y,Tx,Ty,n);
-
-	vector<vector<int>> grid;
-	grid=get_N_M_Mat();
-	int r=0,c=0,newColor=2;
-	floodFill(grid,r,c,newColor);
 }

@@ -65,3 +65,7 @@ void Solve(){
 	// print(setBit(n,1));
 	print(countBits(n));
 }
+
+
+// check, number(n) is power of 2 ?
+// yes if n & (n-1) == 0   (4&3 --> 100 & 011)
