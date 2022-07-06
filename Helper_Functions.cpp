@@ -1,8 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll long long 
+#define ll long long int
 #define mod 1000000007
+
+
+// .. S U M M A R Y ..
+// Combination  nCr
+// Power    2^3
+//
+
 
 
 /////// ........  NO PRINTING ONLY RETURNS VALUES....................
@@ -20,6 +27,7 @@ ll combination(ll n,ll r){
     ll ans = combination(n-1,r-1)%mod + combination(n-1,r)%mod ;
     return nCrdp[n][r] = (ans)%mod;
 }
+// .................................
 //....faster
 ll combination(int n,int r){
     int C[r+1];
@@ -46,6 +54,7 @@ while (b) {
 return ans % mod;
 }
 // .............................
+//
 
 
 ////////////////......................................
