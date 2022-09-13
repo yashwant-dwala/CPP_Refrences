@@ -65,7 +65,7 @@ int Count(vector<int> a,int l,int r,int x){
 
 ////////////// ROTATION COUNT /////////////////////
 
-int Rot_Count(vector<int> a,int l,int r,int n){
+int Rot_Count(vector<int> a,int l,int r){
 	// pivot or smallest of arr
     int n=v.size();
     int l=0,r=n-1;
@@ -82,7 +82,7 @@ int Rot_Count(vector<int> a,int l,int r,int n){
 
 int B_S_Rot_Sort(vector<int> a,int l,int r,int x){
 	int n=a.size();
-	int br=Rot_Count(a,l,r,n);
+	int br=Rot_Count(a,l,r);
 	int z=B_Search_Both_Order(a,0,br-1,x);
 	int y=B_Search_Both_Order(a,br,n-1,x);
 	return max(z,y);

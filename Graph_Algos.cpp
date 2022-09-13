@@ -29,11 +29,11 @@ vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
 // only for directed acyclic
 
 vector<int> vis;
-void dfsT(int n,vector<int> adj[],stack<int> &s){
+void dfsTopo(int n,vector<int> adj[],stack<int> &s){
     vis[n] = 1;
     for(int ch:adj[n]){
         if(vis[ch]==0){
-            dfsT(ch,adj,s);
+            dfsTopo(ch,adj,s);
         }
     }
     s.push(n);
@@ -177,6 +177,41 @@ void shortest_distance(vector<vector<int>>&adj_MAT){
         }
         k++;
     }
+}
+
+///// ................ K O S A R A J U ' S ..........////
+// FOR SCC count
+void dfs(int n,vector<int> adj[]){
+    vis[n] =1;
+    for(int ch:adj[n]){
+        if(vis[ch]==0) dfs(ch,adj);
+    }
+}
+int kosaraju(int V, vector<int> adj[])
+{
+    // fill topoSort-Stack 
+    stack<int> s;
+    vis = vector<int> (V,0);
+    for(int i=0;i<V;i++) if(vis[i]==0) dfsTopo(i,adj,s);
+    
+    //transpose Graph
+    vector<int> Adj[V];
+    for(int i=0;i<V;i++){
+        for(int b:adj[i]) Adj[b].push_back(i);
+    }
+    
+    // find scc using topSort-stack
+    int scc =0;
+    vis = vector<int> (V,0);
+    while(!s.empty()){
+        if(vis[s.top()]==0) {
+            dfs(s.top(),Adj);
+            scc++;
+        } 
+        s.pop();
+    }
+    
+    return scc;
 }
 
 

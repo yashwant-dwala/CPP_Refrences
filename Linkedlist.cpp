@@ -113,25 +113,26 @@ Node* makeCircular(Node* head){
 //////////////////////  TEMPLATE END /////////////////////////////////
 
 
-// k-elements reversed at a time 
-Node* Kreverse (Node* head, int k)
-{ 
-    Node* left=NULL;
-    Node* right;
-    Node* start=head;
-    int i=1;
-    while(i<=k && start!=NULL){
-    	i++;
-    	right=start->next;
-    	start->next=left;
-    	left=start;
-    	start=right;
-    }
-    if(right!=NULL)  // head will always point to starting ele for every call
-    	head->next=Kreverse(right,k);
+	// k-elements reversed at a time 
+	Node* Kreverse (Node* head, int k)
+	{ 
+	    Node* left=NULL;
+	    Node* right;
+	    Node* start=head;
+	    int i=0;
+	    while(start) start = start->next, i++;
+	    while(i<=k && start!=NULL){
+	    	i++;
+	    	right=start->next;
+	    	start->next=left;
+	    	left=start;
+	    	start=right;
+	    }
+	    if(right!=NULL)  // head will always point to starting ele for every call
+	    	head->next=Kreverse(right,k);
 
-    return left;
-}
+	    return left;
+	}
 Node* removeDuplictes(Node* head){
 	Node *curr=head;
 	if(head==NULL) return head;

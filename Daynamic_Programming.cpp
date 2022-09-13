@@ -40,8 +40,7 @@ bool subset_sum(vector<int> A,int B){
     int dp[n+1][B+1];
     for(int i=0;i<=n;i++){
         for(int j=0;j<=B;j++){
-            if(j==0 )
-                dp[i][j]=1;
+            if(j==0 ) dp[i][j]=1;
             else if(i==0) dp[i][j]=0;
             else if(A[i-1]<=j) dp[i][j]=dp[i-1][j-A[i-1]] or dp[i-1][j];
             else dp[i][j]=dp[i-1][j];
@@ -147,7 +146,7 @@ int L[n+1][W+1];
 int LCS(string a,string b,int n,int m){
 	if(n==0 or m==0) return L[n][m]=0;
 	if(L[n][m]!=-1) return L[n][m];
-	if(a[n-1]==b[n-1]){
+	if(a[n-1]==b[m-1]){
 		return L[n][m]=1+LCS(a,b,n-1,m-1);
 	}
 	return L[n][m]=max(LCS(a,b,n-1,m),LCS(a,b,n,m-1));
@@ -305,6 +304,34 @@ string prefix(vector<string> A){
     string s=print_LCS(a,b,a.size(),b.size());
     for(int i=2;i<A.size();i++){
         s=print_LCS(s,A[i],s.size(),A[i].size());
+    }
+    return s;
+}
+
+string longestCommonSubstr (string a, int n){
+    string s;
+    int t[n][n];
+    memset(t,0,sizeof(t));
+    int k =0;
+    while(k<n){
+        for(int i=0;i+k<n;i++){
+            int j = i+k;
+            if(k==0) t[i][j] = 1;
+            else if(k==1 and a[i] == a[j]) t[i][j] = 1; 
+            else if(a[i] == a[j] and t[i+1][j-1]==1) t[i][j] = 1;
+        }
+        k++;
+    }
+    k = n-1;
+    while(k>=0){
+        for(int i=0;i+k<n;i++){
+            int j = i+k;
+            if(t[i][j] == 1){
+                s = a.substr(i,j-i+1);
+                return s;
+            }
+        }
+        k--;
     }
     return s;
 }

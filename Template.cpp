@@ -11,13 +11,14 @@ using namespace std;
 #define S second
 #define mod 1000000007
 #define rep(i,st,en) for(ll i=st;i<en;i++)
+#define all(v) v.begin(),v.end()
 
 // type(x).name();
-#define typeVector_i "St6vectorIiSaIiEE" // string hai
-#define typeString "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"
-#define typePair_i_i "St4pairIiiE" 
-#define typeUnordered_map_i_i "St13unordered_mapIiiSt4hashIiESt8equal_toIiESaISt4pairIKiiEEE"
-#define typeMap_i_i "St3mapIiiSt4lessIiESaISt4pairIKiiEEE"
+#define type_vi "St6vectorIiSaIiEE" // string hai
+#define type_str "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE"
+#define type_pii "St4pairIiiE" 
+#define type_umii "St13unordered_mapIiiSt4hashIiESt8equal_toIiESaISt4pairIKiiEEE"
+#define type_mii "St3mapIiiSt4lessIiESaISt4pairIKiiEEE"
 
 #define minHeap priority_queue<int,vector<int>,greater<int>>
 

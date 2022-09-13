@@ -203,6 +203,7 @@ stack<int> rev(stack<int> st){
 	int temp=st.top();
 	st.pop();
 	st=rev(st);
+	at.push(temp);
 	return st;
 }
 

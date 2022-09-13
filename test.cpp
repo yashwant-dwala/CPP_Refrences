@@ -38,44 +38,10 @@ bool cmp(string &x, string &y){
 		return x<y;
 	return y<x;
 }
-// string reachTheEnd(vector<string> g, int maxTime){
-// 	int n =g.size();
-// 	int time=0;
-// 	int l=0,bot=0;
-// 	string ans="No";
-// 	while(l<n&&bot<n){
-// 		if(l==n-1&&bot==n-1) return ans;
-
-// 		cout<<"Enter "<<time<<endl;
-// 		if(time>=maxTime and (l<n-1||bot<n-1)) return ans;
-  	
-//     	if(g[bot][l+1]!='#'&&l<n-1){
-//         	time++; l++;
-//       	}
-//       	if(g[bot+1][l]!='#'&&bot<n-1){
-//           time++; bot++;
-//       	}
-//      	if(g[bot+1][l]=='#'&&g[bot][l+1]=='#'){
-//        		time--;
-//           	if(g[bot-1][l]!='#'&& bot>0){
-//             	bot--;
-//           	}
-//           	else{
-//             	if(l>0){
-//                 	l--;          
-//               	}
-// 	        }
-// 		}
-// 	ans="Yes";
-// 	return ans;
-// }
 
 
   // this is the main function now
 void solve(){
-	// s.substr(index,length);
-	// next_permutation(s.begin(),s.end());
-	// sort(a,a+n);    OR  sort(a.begin(),a.end());
 	int *p;
 	int ar[11]={1,3,-5,8,-9,-2,6,7,6,-8,9};
 	sort(ar,ar+11);

@@ -254,8 +254,7 @@ void InQueue(Node* root,queue<Node*> &q){
     q.push(root);
     InQueue(root->right,q);
 }
-Node * bToDLL(Node *root)
-{
+Node * bToDLL(Node *root){
     queue<Node*> q;
     InQueue(root,q);
     Node* head=q.front();
